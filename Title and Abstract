@@ -1,0 +1,6 @@
+Title:Introduction to Bayesian Empirical Likelihood
+Abstract: 
+Bayesian Empirical Likelihood (BEL) is a semiparametric inference procedure where parametric prior is multiplied with nonparametric
+empirical likelihood to yield the posterior.
+In this talk, I am going to provide a short introduction to Bayesian empirical likelihood (BEL).
+I will try to discuss some of its important properties and also show some computational demonstration in R.
