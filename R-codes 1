@@ -10,8 +10,8 @@ el=function(data,test.mu,true.mu) # test.mu= set of different test values of mu,
   m=length(test.mu)
   for(j in 1:m)
   {
-    el[j]=el.test(data,mu[j])$'-2LLR'  #for each test value for mu, calculating the -2 logel lik ratio(LLR)
-    lik[j]=-2*sum(log(dnorm(data,mu[j],1)/dnorm(data,true.mu,1))) # #for each test value for mu, calculating the -2 log lik ratio(LLR) (parametric)
+    el[j]=el.test(data,test.mu[j])$'-2LLR'  #for each test value for mu, calculating the -2 logel lik ratio(LLR)
+    lik[j]=-2*sum(log(dnorm(data,test.mu[j],1)/dnorm(data,true.mu,1))) # #for each test value for mu, calculating the -2 log lik ratio(LLR) (parametric)
   }
 data.frame(el,lik)
 }
