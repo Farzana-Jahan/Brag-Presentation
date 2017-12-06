@@ -1,0 +1,213 @@
+
+\documentclass[11pt]{beamer}
+
+\usetheme{Madrid}
+\usepackage{appendixnumberbeamer}
+\usepackage{biblatex}
+\addbibresource{references.bib}
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+\usepackage{pifont} %used inside itemize environment \item[\ding{226}]
+\usepackage{lipsum}
+\usepackage{xspace}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+\usepackage{ragged2e}
+\renewcommand{\raggedright}{\justifying}
+
+
+
+
+
+
+\title[Introduction to Bayesian Empirical Likelihood]{An Introduction to Bayesian Empirical Likelihood}
+
+\date{December 7, 2017}
+\author{Farzana Jahan}
+%\institute{Queensland University of Technology}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Table of contents}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}[fragile]{Introduction}
+
+\begin{itemize} 
+    \item Empirical Likelihood (EL) is a non-parametric analogue of data likelihood which does not require assumption regarding the underlying distribution of the data, but possesses the properties of parametric likelihood.
+    \item Bayesian Empirical Likelihood (BEL) approach increases the flexibility of EL allowing the incorporation of prior knowledge with the data component. 
+\end{itemize}
+\end{frame}
+
+\section{Empirical Likelihood}
+\begin{frame}[fragile]{Empirical Likelihood}
+\begin{itemize}
+    \item According to \footfullcite{owen1988empirical}, EL is a technique for forming hypothesis tests and confidence regions based on nonparametric likelihood ratios
+    \item EL provides likelihood inferences without assuming a parametric family
+    For data $X_i \overset{\text{iid}}{\sim} F$
+    $$L(F)=\prod_{i=1}^{n}(F(X_i)-F(X_i-))=\prod_{i=1}^{n} p_i\hspace{0.06cm} is\hspace{0.05cm} the\hspace{0.05cm}nonparametric \hspace{0.05cm}likelihood$$
+    $L(F)$ is the probability of getting exactly the observed sample values $x_1,x_2, ..., x_n$ from the CDF $F$.\\
+\end{itemize}
+  \end{frame}
+
+\begin{frame}[fragile]{Non Parametric Likelihood Ratio}
+         \begin{itemize}
+         \item In parametric likelihood methods, we construct confidence intervals of the form, 
+         $$\Big \{\theta|\frac{L(\theta)}{L(\hat{\theta})}\geqslant c \Big \}$$ where the threshold c determines the confidence level.
+         \item In parametric statistics, the parameters determine the distribution; in nonparametric statistics, we estimate the CDF directly using the empirical CDF, which is also the nonparametric maximum likelihood estimator of $F$
+         \end{itemize}
+
+
+  \end{frame}
+  
+  \begin{frame}[fragile]{Profile Empirical Likelihood Ratio}
+         \begin{itemize}
+         \item The analogous concept to a likelihood ratio is: $$R(F)=\frac{L(F)}{L(\hat{F})}$$ when, the data contains no ties and $F$ places probability $p_i\geqslant 0$  on the value $X_i\in R$, then $L(F)=\prod_{i=1}^{n} p_i$ and $p_i= P_F(X=x_i)$. So, $$R(F)=\prod_{i=1}^{n}np_i$$ 
+         \item $R(F)$ is referred to as the Profile Empirical Likelihood Ratio
+         \end{itemize}
+  \end{frame}
+  \begin{frame}[fragile]{Profile Empirical Likelihood Ratio}
+         \begin{itemize}
+         \item If $X_i=X_j$ for $i \neq j$, we say $X_i$ and $X_j$ are tied. 
+         \item If the data contains some ties, suppose the data contains k distinct values  $z_j$ arising $n_j\geqslant 1$ times in the sample and has probability $p_j$ under $F$
+         \item Then, the profile Empirical likelihood function can be defined as: $$R(F)= \prod_{i=1}^{k}\Big (\frac{np_j}{n_j}\Big)^{n_j}$$
+         \end{itemize}
+  \end{frame}
+  
+    \begin{frame}[fragile]{Profile Empirical Likelihood Ratio}
+         \begin{itemize}
+         \item We define profile ELR in terms of observation specific weights $w_i\geqslant 0$ for $i=1,2,...,n$. The weights are chosen so that $\sum_i w_i =p_j$ over all i with $X_i=z_j$.
+         \item The EL of F in terms of weight becomes, $L(F)=\prod_{i=1}^{n} w_i$
+         \item Then, the profile Empirical likelihood function can be defined as: $$R(F)= \prod_{i=1}^{n}n w_i$$ where $w_i \geqslant 0, \sum_{i=1}^{n} w_i \leqslant 1$ and $F$ puts probability $ \sum_{X_i=X_j} w_j$ on $X_i$
+         \end{itemize}
+  \end{frame} 
+ 
+\begin{frame}{Properties of EL}
+EL has a few properties of parametric likelihood:
+  \begin{itemize}
+      \item EL gives a data determined shape for confidence regions for two or more parameters of interest
+      \item asymptotic $\chisq$ distribution holds for the log likelihood ratio using EL \footfullcite{wilks1938large}
+      \item Bartlett's correction applies to EL \footfullcite{diciccio1991empirical}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{EL for a single functional}
+  \begin{itemize}
+      \item EL can be constructed for different parameters of interest such as: mean, median, regression parameters etc. 
+      \item When, we are interested in inference concerning some functional of F, say, $\theta(F)$ and $\theta (F)$ can be determined by an estimating equation $f(y_i,\theta)$, then the empirical likelihood ratio function is defined by:$$R(\theta)=max \Big \{\prod_{i=1}^{n} w_i|\sum_{i=1}^{n} w_i =1,\sum_{i=1}^{n} w_i f(y_i,\theta)=0 \Big \}$$
+      \item Estimating Equations\\
+      $f(y_i,\theta)=Y-\theta $ for mean\\
+      $f(y_i,\theta)=(Y-X^T\theta)X$ for regression and so on.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{EL for Mean}
+  \begin{itemize}
+      \item We will illustrate the ideas behind empirical likelihood by deriving the empirical likelihood for the mean
+      \item Empirical Likelihood for mean: $$R(\mu)=max\{\prod_{i=1}^{n} w_i|\sum_{i=1}^{n} w_i =1,\sum_{i=1}^{n} w_i Y_i=\mu \}$$
+      \item In order to compute $R(\theta)$ we can equivalently maximize $\sum _{i=1}^n logw_i$ subject to
+      $\sum_{i=1}^{n} w_i =1,\sum_{i=1}^{n} w_i Y_i=\mu$
+      \item Note that because log is a concave function, a unique global maximum will exist
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{EL for Mean}
+
+  \begin{itemize}
+      \item We may solve for the optimum values of $\{w_i\}$ using Lagrange multipliers; where our Lagrangian function G is$$G= \sum _{i=1}^n log w_i +n \lambda \sum_{i=1}^{n} w_i(Y_i-\mu) - \gamma (\sum_{i=1}^{n} w_i  -1)$$
+      \item Hence, $\frac{\delta G}{\delta w_i} = \frac{1}{w_i}-n \lambda (y_i-\mu)+\gamma $\\
+      $0=\sum_{i=1}^n w_i\frac{\delta G}{\delta w_i} =n-0+\gamma$
+      \item Thus, $\gamma= -n$ and $\lambda$ satisfies ,$$\frac{1}{n}\frac{y_i-\mu}{1+\lambda(y_i-\mu)}=0$$
+      \item There is no closed form solution for $\lambda$, so it should be solved by numerical search. In this case, $\lambda$ will be solved by using Newton-Lagrange algorithm.
+  \end{itemize}
+ 
+\end{frame}
+
+
+
+
+\begin{frame}{EL for Mean in R}
+\begin{itemize}
+    \item 	There is a package in R that solves empirical likelihood optimization problems called "emplik" developed by Mai Zhou in 2016
+    \item 	The package details are available in:\\
+    https://CRAN.R-project.org/package=emplik 
+    \item el.test from "emplik" package is used to calculate the -2 times log empirircal likelihood for any test value for mean and performs the required optimization.
+    \item Demo in R
+\end{itemize}
+\end{frame}
+
+\section{Bayesian Empirical Likelihood}
+\begin{frame}{Bayesian Empirical Likelihood}
+\begin{itemize}
+    \item Likelihood being the central of Bayesian inference, is used to update prior beliefs and yields posterior inference. 
+    \item \footfullcite{lazar2003bayesian} argued that EL can be used in place of a density and, when multiplied by prior can yield the posterior distribution of interest in a Bayesian analysis.
+    \item The author explored the characteristics of Bayesian inference using EL in spite of a parametric density.
+\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Bayesian Empirical Likelihood}
+\begin{itemize}
+    \item To proceed with the Bayesian posterior, the profile EL function is chosen as the likelihood part of the Bayes theorem, and a prior on the functional $\theta$, $p(\theta)$ is imposed  
+    \item The posterior of interest would be:$$f(\theta|y_i) \propto p(\theta) EL(\theta) $$
+    \item For  $y_1,y_2,...,y_n$ from some unknown $F$, let, $\theta$ be the parameter of interest for inference,$f(y_i,\theta)$ be the estimating equation, the empirical likelihood ratio function can be denoted by$$ W_E(\theta)=2 \sum_{i=1}^n log\{1+\lambda^T f(y_i,\theta)\}$$ 
+    where the $\lambda$ satisfies $\sum_{i=1}^n \frac{f(y_i,\theta)}{1+\lambda^T f(y_i,\theta)}=0$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Bayesian Empirical Likelihood for mean}
+\begin{itemize}
+  \item For a specific case of one-dimensional parameter of interest, $\mu$ from a data set $y_,y_2, ... , y_n$, the profile empirical likelihood would be: $$W_E(\mu)=2 \sum_{i=1}^n log\{1+\lambda (y_i-\mu)\}$$ where $\lambda$ satisfies: $\sum_{i=1}^n \frac{y_i-\mu}{1+ \lambda (y_i-\mu)}=0$
+  \item The posterior of $\mu$, $f(\mu|y_i) \propto EL(\mu) p(\mu)$
+  \item Bayesian Empirical Likelihood method for calculating posterior is often referred to as "Semi-parametric method".
+  \item Demo in R
+\end{itemize}
+\end{frame}
+
+\section{Previous Works on Bayesian Empirical Likelihood}
+\begin{frame}{Previous Research involving BEL}
+\begin{itemize}
+    \item \footfullcite{schennach2005bayesian} introduced Bayesian Exponentially Tilted Empirical Likelihood (BETEL) exploring the Bayesian analysis of moment condition models through EL.
+    \item \footfullcite{yang2012bayesian} applied BEL in quantile regression.
+    \item \footfullcite{mengersen2013bayesian} used EL in approximate Bayesian computation and proposed a new algorithm (Bayesian computation via empirical likelihood, BCel) by replacing the data likelihood by EL. 
+    
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Previous Research involving BEL}
+    \begin{itemize}
+    \item \footfullcite{porter2015bayesian} applied BEL in construction of hierarchical spatial models for small area estimation. 
+    \item \footfullcite{chib2017bayesian} developed a fully Bayesian framework for comparison and estimation in statistical models using BETEL.
+    \item \footfullcite{chaudhuri2017hamiltonian} developed an efficient Hamiltonian Monte Carlo method of sampling from BEL based posterior distribution of the paramers of interest
+    \end{itemize}
+\end{frame}
+
+\section{Future Works}
+\begin{frame}{Future work plan}
+The proposed title of my PhD thesis is, "Bayesian Empirical Likelihood Methods for Big Data Analysis". \\
+I will try to address the following research questions:
+    \begin{itemize}
+    \item 	How do existing BEL methods perform for big data analysis (high dimension and very large sample size)?
+    \item 	How are BEL methods related other existing non parametric Bayesian methods for big data? 
+    \item   Can BEL methods be improved to increase its performance in the context of Big data? 
+    \item   How can BEL methods be developed for more complex hierarchical space-time models, mixed models and mixture models?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{}
+    \centering
+    \bf \Huge{Thank You!}
+\end{frame}
+
+\end{document}
