@@ -1,7 +1,12 @@
-# Comparison of parametric and empirical likelihood
-
 require("emplik") # installting the required package "emplik"
 library(emplik)
+
+#running empirical likelihood ratio test for specific mean
+d=rnorm(100)
+el.test(d,0)
+el.test(d,2)
+
+# Comparison of parametric and empirical likelihood
 
 el=function(data,test.mu,true.mu) # test.mu= set of different test values of mu, true.mu=true value of mu
 {
@@ -15,7 +20,6 @@ el=function(data,test.mu,true.mu) # test.mu= set of different test values of mu,
   }
 data.frame(el,lik)
 }
-
 
 d=rnorm(100) #creating data vector from standard normal distribution
 mu=seq(-1,1,0.001) # creating test values for mu
