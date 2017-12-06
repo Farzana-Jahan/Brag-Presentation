@@ -1,0 +1,42 @@
+#calculating and plotting posterior for mean  using normal prior with cosntant variance applying BEL and parametric likelihood
+library(emplik)
+#function for calculating profile empirical likeihood
+pel=function(data,test.mu) #test.mu be some test values for mu
+{
+  el=c() #creating empty vectors for el 
+  m=length(test.mu)
+  for(j in 1:m)
+  {
+    el[j]=exp(-(el.test(data,test.mu[j])$'-2LLR')/2) #for each test value for mu, calculating the profile likelihood ratio
+  }
+  el
+}
+
+n=100
+data.mu=0.25
+prior.mu=0.1
+data.sd=1
+prior.sd=1
+test.mu=seq(-1,1,0.001)
+#Function to plot posterior using BEL and parametric likelihood
+plot_post=function(n,data.mu,prior.mu,data.sd,prior.sd,test.mu)
+{
+#generating data 
+data=rnorm(n,data.mu,data.sd)
+prior=dnorm(test.mu,prior.mu,prior.sd) #calculating prior, here assuming a N(0.5,1) prior
+el=pel(data,test.mu)
+post_el= prior*el #calculating posterior values for all elements of test.mu
+mean_post_param= ((prior.sd^2)/((data.sd^2/n)+prior.sd^2))*mean(data)+((data.sd^2)/((data.sd^2/n)+prior.sd^2))*prior.mu
+var_post_param= ((1/prior.sd^2)+(n/data.sd^2))^(-1)
+post_param=dnorm(test.mu,mean_post_param,sqrt(var_post_param))
+
+#Plotting the BEL POsterior
+par(mfrow=c(2,1))
+plot(test.mu,post_el,type="l", main="Posterior Distribution using BEL",xlab=expression(mu),ylab="Posterior Density")
+plot(test.mu,post_param,type="l", main="Posterior Distribution using Parametric Likelihood",xlab=expression(mu),ylab="Posterior Density")
+}
+#creating test.mu
+mu=seq(-1,1,0.0001)
+#running plot_post for plotting the posterior
+plot_post(100,0,0.025,1,1,mu)
+
