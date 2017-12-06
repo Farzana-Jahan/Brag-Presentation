@@ -1,0 +1,27 @@
+# Comparison of parametric and empirical likelihood
+
+require("emplik") # installting the required package "emplik"
+library(emplik)
+
+el=function(data,test.mu,true.mu) # test.mu= set of different test values of mu, true.mu=true value of mu
+{
+  el=c() #creating empty vectors for el and parametric likelihood(lik)
+  lik=c()
+  m=length(test.mu)
+  for(j in 1:m)
+  {
+    el[j]=el.test(data,mu[j])$'-2LLR'  #for each test value for mu, calculating the -2 logel lik ratio(LLR)
+    lik[j]=-2*sum(log(dnorm(data,mu[j],1)/dnorm(data,true.mu,1))) # #for each test value for mu, calculating the -2 log lik ratio(LLR) (parametric)
+  }
+data.frame(el,lik)
+}
+
+
+d=rnorm(100) #creating data vector from standard normal distribution
+mu=seq(-1,1,0.001) # creating test values for mu
+
+res=el(d,mu,0) # running the function to calculate -2*logLLR using parametric and empirical lik
+
+#Plotting parametric and empirical -2* log LLR 
+plot(mu,res$el,type="l",col="red",main="Empirical Likelihood and Likelihood ratio Curves", xlab=expression(mu),ylab="-2* log(LR)")
+lines(mu,res$lik,lty=2,col="blue")
