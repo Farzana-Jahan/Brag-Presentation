@@ -33,7 +33,7 @@
 
 \maketitle
 
-\begin{frame}{Table of contents}
+\begin{frame}{Outline}
   \setbeamertemplate{section in toc}[sections numbered]
   \tableofcontents[hideallsubsections]
 \end{frame}
@@ -62,7 +62,7 @@
 \begin{frame}[fragile]{Non Parametric Likelihood Ratio}
          \begin{itemize}
          \item In parametric likelihood methods, we construct confidence intervals of the form, 
-         $$\Big \{\theta|\frac{L(\theta)}{L(\hat{\theta})}\geqslant c \Big \}$$ where the threshold c determines the confidence level.
+         $$\Big \{\theta|\frac{L(\theta)}{L(\theta_0)}\geqslant c \Big \}$$ where the threshold c determines the confidence level.
          \item In parametric statistics, the parameters determine the distribution; in nonparametric statistics, we estimate the CDF directly using the empirical CDF, which is also the nonparametric maximum likelihood estimator of $F$
          \end{itemize}
 
@@ -71,7 +71,7 @@
   
   \begin{frame}[fragile]{Profile Empirical Likelihood Ratio}
          \begin{itemize}
-         \item The analogous concept to a likelihood ratio is: $$R(F)=\frac{L(F)}{L(\hat{F})}$$ when, the data contains no ties and $F$ places probability $p_i\geqslant 0$  on the value $X_i\in R$, then $L(F)=\prod_{i=1}^{n} p_i$ and $p_i= P_F(X=x_i)$. So, $$R(F)=\prod_{i=1}^{n}np_i$$ 
+         \item The analogous concept to a likelihood ratio is: $$R(F)=\frac{L(F)}{L(F_0)}$$ when, the data contains no ties and $F$ places probability $p_i\geqslant 0$  on the value $X_i\in R$, then $L(F)=\prod_{i=1}^{n} p_i$ and $p_i= P_F(X=x_i)$. So, $$R(F)=\prod_{i=1}^{n}np_i$$ 
          \item $R(F)$ is referred to as the Profile Empirical Likelihood Ratio
          \end{itemize}
   \end{frame}
