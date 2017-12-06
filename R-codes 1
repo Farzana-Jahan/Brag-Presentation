@@ -29,3 +29,4 @@ res=el(d,mu,0) # running the function to calculate -2*logLLR using parametric an
 #Plotting parametric and empirical -2* log LLR 
 plot(mu,res$el,type="l",col="red",main="Empirical Likelihood and Likelihood ratio Curves", xlab=expression(mu),ylab="-2* log(LR)")
 lines(mu,res$lik,lty=2,col="blue")
+legend(0.7,10,c("EL","PL"),lty=c(1,2),col=c("red","blue"))
