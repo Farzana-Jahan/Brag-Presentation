@@ -87,7 +87,7 @@
          \begin{itemize}
          \item We define profile ELR in terms of observation specific weights $w_i\geqslant 0$ for $i=1,2,...,n$. The weights are chosen so that $\sum_i w_i =p_j$ over all i with $X_i=z_j$.
          \item The EL of F in terms of weight becomes, $L(F)=\prod_{i=1}^{n} w_i$
-         \item Then, the profile Empirical likelihood function can be defined as: $$R(F)= \prod_{i=1}^{n}n w_i$$ where $w_i \geqslant 0, \sum_{i=1}^{n} w_i \leqslant 1$ and $F$ puts probability $ \sum_{X_i=X_j} w_j$ on $X_i$
+         \item Then, the profile Empirical likelihood function can be defined as: $$R(F)= \prod_{i=1}^{n} n w_i$$ where $w_i \geqslant 0, \sum_{i=1}^{n} w_i \leqslant 1$ and $F$ puts probability $ \sum_{X_i=X_j} w_j$ on $X_i$
          \end{itemize}
   \end{frame} 
  
@@ -115,7 +115,7 @@ EL has a few properties of parametric likelihood:
 \begin{frame}{EL for Mean}
   \begin{itemize}
       \item We will illustrate the ideas behind empirical likelihood by deriving the empirical likelihood for the mean
-      \item Empirical Likelihood for mean: $$R(\mu)=max\{\prod_{i=1}^{n} w_i|\sum_{i=1}^{n} w_i =1,\sum_{i=1}^{n} w_i Y_i=\mu \}$$
+      \item Empirical Likelihood for mean: $$R(\mu)=max\{\prod_{i=1}^{n} n w_i|\sum_{i=1}^{n} w_i =1,\sum_{i=1}^{n} w_i Y_i=\mu \}$$
       \item In order to compute $R(\theta)$ we can equivalently maximize $\sum _{i=1}^n logw_i$ subject to
       $\sum_{i=1}^{n} w_i =1,\sum_{i=1}^{n} w_i Y_i=\mu$
       \item Note that because log is a concave function, a unique global maximum will exist
